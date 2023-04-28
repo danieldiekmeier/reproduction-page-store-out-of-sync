@@ -1,38 +1,21 @@
-# create-svelte
+# SvelteKit Reproduction
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+The `$page` store is not updated when `use:enhance` is used. `data` and `$page.data` are not in sync.
 
-## Creating a project
+## Steps to reproduce
 
-If you're seeing this, you've probably already done this step. Congrats!
+1. Start with `pnpm i && pnpm dev`
+2. Open `http://localhost:5173/`
+3. Click the "Increase via use:enhance" button
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+You should see that the `data.state` value increases, but the `$page.data.state` value does not.
 
-# create a new project in my-app
-npm create svelte@latest my-app
+In the console, you can see that the `$page` store is updated, but reset to the initial value immediately after.
+
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+data.state: 0 / $page.data.state: 0
+// click button
+data.state: 1 / $page.data.state: 0
+data.state: 1 / $page.data.state: 1
+data.state: 1 / $page.data.state: 0
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
