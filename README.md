@@ -1,5 +1,7 @@
 # SvelteKit Reproduction
 
+**Update**: This was fixed in @sveltejs/kit@1.16.1 via PR [#9798](https://github.com/sveltejs/kit/pull/9798)
+
 The `$page` store is not updated when `use:enhance` is used. `data` and `$page.data` are not in sync.
 
 ## Steps to reproduce
